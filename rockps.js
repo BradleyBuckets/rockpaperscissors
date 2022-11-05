@@ -15,8 +15,8 @@ function getComputerChoice() {
 
 // Play a single round of rpm
 // take two variables, player choice and computer choice
-let playerInput = "Rock"
-let computerChoice = "Rock"
+// let playerInput = prompt("Please choose Rock, Paper, or Scissors.", "Rock")
+// let computerChoice = "Rock"
 // change player choice to always be all proper noun case
 function capitalize(string) {
     // lower case everything
@@ -25,7 +25,7 @@ function capitalize(string) {
     let upper = lower[0].toUpperCase()
     return lower.replace(lower[0], upper)
 }
-let playerChoice = capitalize(playerInput)
+// let playerChoice = capitalize(playerInput)
 // compare player choice and computer choice
 function playRound(playerChoice, computerChoice) {
     // if player is the same as computer, it's a tie
@@ -62,6 +62,9 @@ function playRound(playerChoice, computerChoice) {
         computerScore += 1
         return "You lose! Rock beats Scissors"
     }
+    else {
+        return "I'm sorry, looks like you didn't type in a valid choice."
+    }
 }
 // create a game function where you can play 5 times, it keeps score, and it declares a winners
 let playerScore = 0
@@ -69,7 +72,9 @@ let computerScore = 0
 function game() {
     // for loop 5 times
     for(let i = 0; i < 5; i++){
-        console.log(playRound('Rock', getComputerChoice()))
+        let playerInput = prompt("Please choose Rock, Paper, or Scissors.", "Rock")
+        let playerChoice = capitalize(playerInput)
+        console.log(playRound(playerChoice, getComputerChoice()))
     }
     // see who has more points and declare a winner
     if (playerScore > computerScore) {
