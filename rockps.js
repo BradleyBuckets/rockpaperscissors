@@ -53,7 +53,7 @@ function playRound(playerChoice, computerChoice) {
         return "You Win! Paper beats Rock"
     }
     // if player is scissors and computer is paper, player wins
-    if (playerChoice === "Scissors" && computerChoice === " Paper") {
+    if (playerChoice === "Scissors" && computerChoice === "Paper") {
         playerScore += 1
         return "You Win! Scissors beats Paper"
     }
@@ -69,10 +69,11 @@ function playRound(playerChoice, computerChoice) {
 // create a game function where you can play 5 times, it keeps score, and it declares a winners
 let playerScore = 0
 let computerScore = 0
+let playerInput = ""
 function game() {
     // for loop 5 times
     for(let i = 0; i < 5; i++){
-        let playerInput = prompt("Please choose Rock, Paper, or Scissors.", "Rock")
+        playerInput = prompt("Please choose Rock, Paper, or Scissors.", "Rock")
         let playerChoice = capitalize(playerInput)
         console.log(playRound(playerChoice, getComputerChoice()))
     }
@@ -84,4 +85,34 @@ function game() {
         console.log("Looks like you lost to the computer, better luck next time.")
     }
 }
-game()
+// make a button that has an event that triggers one round of the game and records the results
+// get all elements in the dom
+let compChoiceSpan = document.querySelector(".computerChoice")
+let playerChoiceSpan = document.querySelector(".playerChoice")
+let resultSpan = document.querySelector(".result")
+let compScoreSpan = document.querySelector(".compScore")
+let playerScoreSpan = document.querySelector(".playerScore")
+let buttons = document.querySelectorAll("button")
+
+// add evenet listener for click and then execute one round
+buttons.forEach(item => {
+    item.addEventListener('click', e => {
+        // if you select this button, this button is your selection
+        playerInput = item.className;
+        let playerChoice = capitalize(playerInput);
+        let computerSelection = getComputerChoice();
+        // play round
+        resultSpan.textContent = playRound(playerChoice, computerSelection);
+        // show all the changes on the page
+        setTextContent(playerChoice, computerSelection);
+    })
+})
+
+// show all the changes on the page
+function setTextContent(playChoice, compChoice) {
+    compChoiceSpan.textContent = compChoice;
+    playerChoiceSpan.textContent = playChoice;
+    compScoreSpan.textContent = computerScore;
+    playerScoreSpan.textContent = playerScore;
+
+}
