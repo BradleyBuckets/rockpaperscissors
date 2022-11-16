@@ -103,6 +103,8 @@ buttons.forEach(item => {
         let computerSelection = getComputerChoice();
         // play round
         resultSpan.textContent = playRound(playerChoice, computerSelection);
+        // check for a winner
+        checkWinner();
         // show all the changes on the page
         setTextContent(playerChoice, computerSelection);
     })
@@ -115,4 +117,20 @@ function setTextContent(playChoice, compChoice) {
     compScoreSpan.textContent = computerScore;
     playerScoreSpan.textContent = playerScore;
 
+}
+
+function checkWinner(){
+    if (playerScore === 5) {
+        alert("Congratulations! you win the game!");
+        reset();
+    }
+    if (computerScore === 5) {
+        alert("Wow! Looks like you lost the game to the computer!");
+        reset()
+    }
+}
+
+function reset(){
+    playerScore = 0;
+    computerScore = 0;
 }
